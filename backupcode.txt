@@ -1,0 +1,105 @@
+// class polynomial : public Equation{
+//   private:
+//     std::vector<double>coeff_;
+//   public:
+//     polynomial(std::vector<double> coeff)
+//     :coeff_(coeff){};
+    
+
+//     double Evaluate(double x) const override{
+//     double result = 0.0;
+//     for (size_t i = 0; i < coeff_.size(); i++) {
+//       result += coeff_[i] * std::pow(x, i);
+//     }
+//     return result;
+//     }
+
+
+//     Equation* Differentiate() const override {
+//     std::vector<double> new_coefficients(coeff_.size() - 1);
+//     for (size_t i = 1; i < coeff_.size(); i++) {
+//       new_coefficients[i - 1] = coeff_[i] * i;
+//     }
+//     return new polynomial(new_coefficients);
+//   }
+// };
+
+
+
+// class Sinus : public Equation {
+//  public:
+//   Sinus(Equation* equation) : equation_(equation) {}
+
+//   double Evaluate(double x) const override {
+//     return std::sin(equation_->Evaluate(x));
+//   }
+
+//   Equation* Differentiate() const override {
+//     return new Product(new Cosinus(equation_), equation_->Differentiate());
+//   }
+
+//   ~Sinus() {
+//     delete equation_;
+//   }
+
+//  private:
+//   Equation* equation_;
+// };
+
+
+// class Cosinus: public Equation{
+//   public: 
+//     Cosinus(Equation* equation) :equation_(equation){};
+
+//     double Evaluate(double x) const override{
+//       return std::cos(equation_->Evaluate(x));
+//     }
+
+//     Equation* Differentiate() const override {
+//     return new Product(new Sinus(equation_), equation_->Differentiate());
+//     }
+
+//   private:
+//     Equation* equation_;
+// };
+
+// class Product : public Equation {
+//  public:
+//   Product(Equation* left, Equation* right) : left_(left), right_(right) {}
+
+//   double Evaluate(double x) const override {
+//     return left_->Evaluate(x) * right_->Evaluate(x);
+//   }
+
+//   Equation* Differentiate() const override {
+//     // The derivative of the product of two functions is the sum of the
+//     // products of their derivatives
+//     return new Product(left_->Differentiate(), right_->Differentiate());
+//   }
+
+//  private:
+//   Equation* left_;
+//   Equation* right_;
+// };
+
+
+
+  // Create a polynomial function with coefficients {1, 2, 3}
+  // std::vector<double> coefficients = {1, 2, 3};
+  // polynomial f(coefficients);
+
+  // // Evaluate the function at x = 2
+  // double x = 2.0;
+  // double y = f.Evaluate(x);
+  // std::cout << "f(" << x << ") = " << y << std::endl;
+
+
+  // // Differentiate the function
+  // Equation* df = f.Differentiate();
+
+  // // Evaluate the derivative at x = 2
+  // y = df->Evaluate(x);
+  // std::cout << "df(" << x << ") = " << y << std::endl;
+
+  // // Don't forget to delete the derivative object when you're done with it
+  // delete df;
